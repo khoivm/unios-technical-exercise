@@ -1,0 +1,17 @@
+# Windows
+Thumbs.db
+desktop.ini
+
+# OS X
+.DS_Store
+.Spotlight-V100
+.Trashes
+._*
+
+# Node.js / Next.js
+.next
+node_modules
+build
+npm-debug.log
+.env
+
