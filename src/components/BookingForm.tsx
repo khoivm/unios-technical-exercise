@@ -58,10 +58,10 @@ export const BookingForm = (): JSX.Element => {
 
     return (
         <Box p={8} sx={{ maxWidth: 900, mx: 'auto' }}>
-            <Heading mb={6}>Submit new lesson booking</Heading>
+            <Heading mb={6}>Schedule a new lesson</Heading>
             <Box as="form" onSubmit={handleSubmit}>
                 <Label sx={labelStyle} htmlFor="name">
-                    My name
+                    Class Name
                 </Label>
                 <Input name="name" id="name" mb={3} autoComplete="off" />
                 <Label sx={labelStyle} htmlFor="teacher">
