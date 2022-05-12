@@ -24,7 +24,7 @@ export const extractSearchOptions = <T>(query: { [key: string]: string | string[
 
     const opts = JSON.parse(query?.searchOptions as string) as SearchOptions<T>;
     return {
-        page: opts?.page ? Number(opts?.page) : null,
+        page: opts?.page ? Number(opts?.page) : 1,
         pageSize: opts?.pageSize ? Number(opts?.pageSize) : null,
         sortField: opts?.sortField,
         sortDirection: opts?.sortDirection,
