@@ -1,0 +1,8 @@
+{
+    "id": "82341b51-51ca-4c6c-8ee5-ebe478cd1c48",
+    "name": "Local Development Environment",
+    "values": [
+        { "key": "protocol", "value": "http", "enabled": true, "type": "default" },
+        { "key": "hostname", "value": "localhost:3000", "enabled": true, "type": "default" }
+    ]
+}
