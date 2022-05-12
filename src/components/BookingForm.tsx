@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeUICSSObject } from '@theme-ui/css';
-import { Box, Flex, Text, Heading, Paragraph } from '@theme-ui/components';
-import Image from 'next/image';
-import { Label, Input, Checkbox, Select, Textarea, Radio, Slider, Button } from 'theme-ui';
-import { Room } from '@/domain/room';
+import { Box, Heading } from '@theme-ui/components';
+import { Label, Input, Select, Button } from 'theme-ui';
 import { Teacher } from '@/domain/teacher';
 import { SessionDay } from '@/domain/session';
 
@@ -14,21 +12,16 @@ const days: SessionDay[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursda
 const labelStyle: ThemeUICSSObject = { display: 'block', mt: 4, mb: 2 };
 
 export const BookingForm = (): JSX.Element => {
-    const [rooms, setRooms] = useState<Room[]>([]);
     const [teachers, setTeachers] = useState<Teacher[]>([]);
 
     useEffect(() => {
         //Fetch data
-        const fetchData = async () => {
-            const response = await fetch('/api/rooms');
-            const rooms = await response.json();
-            setRooms(rooms.data);
-
-            const response2 = await fetch('/api/teachers');
-            const teachers = await response2.json();
+        const fetchTeachers = async () => {
+            const response = await fetch('/api/teachers');
+            const teachers = await response.json();
             setTeachers(teachers.data);
         };
-        fetchData();
+        fetchTeachers();
     }, []);
 
     const handleSubmit = async (e) => {
@@ -75,17 +68,6 @@ export const BookingForm = (): JSX.Element => {
                         </option>
                     ))}
                 </Select>
-                <Label sx={labelStyle} htmlFor="hour">
-                    Start hour
-                </Label>
-                <Select name="hour" id="hour" mb={3}>
-                    <option value="">Select an option...</option>
-                    {hours?.map((hour) => (
-                        <option key={hour} value={hour}>
-                            {hour}:00
-                        </option>
-                    ))}
-                </Select>
                 <Label sx={labelStyle} htmlFor="day">
                     Day
                 </Label>
@@ -94,6 +76,17 @@ export const BookingForm = (): JSX.Element => {
                     {days?.map((day) => (
                         <option key={day} value={day}>
                             {day}
+                        </option>
+                    ))}
+                </Select>
+                <Label sx={labelStyle} htmlFor="hour">
+                    Start hour
+                </Label>
+                <Select name="hour" id="hour" mb={3}>
+                    <option value="">Select an option...</option>
+                    {hours?.map((hour) => (
+                        <option key={hour} value={hour}>
+                            {hour}:00
                         </option>
                     ))}
                 </Select>

@@ -40,7 +40,13 @@ Please ensure your development environment has the following tools available in 
 
 #### Task 1
 
-Currently, the form allows users to specify a name and select a teacher, room, and time slot for a proposed class. However, hitting the submit button throws an HTTP 500 error because the corresponding API endpoint has not yet been implemented.
+The form should allow users to specify a name and select a teacher, room, and time slot for a proposed class. Currently, the form does not provide a way for a user to select a room.
+
+Please update the form to add this missing capability.
+
+#### Task 2
+
+With all required fields present, hitting the submit button still throws an HTTP 500 error because the corresponding API endpoint has not yet been implemented.
 
 Please implement the `api/classes` REST endpoint(s) so that the following functional requirements are met:
 
@@ -49,11 +55,11 @@ Please implement the `api/classes` REST endpoint(s) so that the following functi
 -   [ ] The system must prevent rooms from being double-booked for the same session
 -   [ ] A class is saved/persisted in the system if each of the above requirements is met
 
-#### Task 2
+#### Task 3
 
 A seperate system requires an understanding of the lessons a teacher is assigned to.
 
-Create a GET endpoint that returns all of the classes for a given teacher. Please note that this should be a dedicated endpoint (i.e. it should not leverage the built-in search filter capability of the repositories).
+Add a new GET endpoint to the API that returns all of the classes for a given teacher. Please note that this should be a dedicated endpoint (i.e. it should not leverage the built-in search filter capability of the repositories).
 
 ### Submitting your solution
 
@@ -67,11 +73,12 @@ To submit your solution for review, please create a pull request from your fork 
 
 ### For Interviewees
 
-If you are undertaking this exercise as part of a an interview, you may have been provided with a different set of exercises from those listed above. Additionally, please take some time to look over the codebase as a whole aside from the exercise tasks. We will be interested in hearing your opinions ideas surrounding this codebase including:
+If you are undertaking this exercise as part of a an interview, you may have been provided with a different set of exercises from those listed above. Additionally, please take some time to look over the codebase as a whole aside from the exercise tasks. We will be interested in hearing your opinions and ideas surrounding this codebase including:
 
 -   aspects of the codebase that you like or dislike, and the reasons why
 -   any facets of the solution architecture that you would change or that you feel could be improved
 -   any commentary on style, tech-stack, libraries used, etc.
+-   any changes that you would personally make to the application as a whole
 
 ### Contact
 
