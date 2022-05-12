@@ -20,17 +20,20 @@ Please ensure your development environment has the following tools available in 
     yarn install
     ```
 1. Create a container to run a development PostgreSQL instance (Note that the following will expose the database through port `5439`):
+
     ```bash
-    docker pull postgres;
-    docker run --name unios-exercise-db -e POSTGRES_PASSWORD=password -d -p 5439:5432 postgres;
+    docker pull postgres
+
+    docker run --name unios-exercise-db -e POSTGRES_PASSWORD=password -d -p 5439:5432 postgres
     ```
+
 1. Create the development database for the web application:
     ```bash
-    yarn prisma migrate reset;
+    yarn prisma migrate reset
     ```
 1. You can now run the local development server:
     ```bash
-    yarn next;
+    yarn next
     ```
 
 ### Exercises
