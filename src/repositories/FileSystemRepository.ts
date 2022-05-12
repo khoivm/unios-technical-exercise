@@ -1,8 +1,8 @@
-import IRepository, { RepositoryModel, SearchFilter, SearchOptions } from './IRepository';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import IRepository, { RepositoryModel, SearchFilter, SearchOptions } from './IRepository';
 
 export abstract class FileSystemRepository<T extends RepositoryModel> implements IRepository<T> {
-    private _filePath: string;
+    protected _filePath: string;
 
     constructor(filePath: string) {
         if (!existsSync(filePath)) throw new Error(`File could not be found: '${filePath}'`);
@@ -62,7 +62,7 @@ export abstract class FileSystemRepository<T extends RepositoryModel> implements
         writeFileSync(this._filePath, JSON.stringify(newState), 'utf-8');
     }
 
-    private _applyFilters(rows: T[] = [], filter: SearchFilter<T> = null) {
+    protected _applyFilters(rows: T[] = [], filter: SearchFilter<T> = null) {
         if (filter === null) return rows;
 
         // map filters to a list of predicates
@@ -74,7 +74,7 @@ export abstract class FileSystemRepository<T extends RepositoryModel> implements
         return rows.filter((t) => conditions.every((p) => p(t)));
     }
 
-    private _applySearchOptions(rows: T[] = [], options: SearchOptions<T> = null) {
+    protected _applySearchOptions(rows: T[] = [], options: SearchOptions<T> = null) {
         if (options === null) return rows;
 
         let result: T[];
@@ -103,7 +103,7 @@ export abstract class FileSystemRepository<T extends RepositoryModel> implements
         return result;
     }
 
-    private _loadDataFromFile() {
+    protected _loadDataFromFile() {
         const rawData = readFileSync(this._filePath, 'utf-8');
         return JSON.parse(rawData) as T[];
     }

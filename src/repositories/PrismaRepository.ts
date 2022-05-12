@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import IRepository, { RepositoryModel, SearchFilter, SearchOptions } from './IRepository';
 
 export abstract class PrismaRepository<T extends RepositoryModel> implements IRepository<T> {
-    private _modelName: string;
-    private _prisma: PrismaClient;
+    protected _modelName: string;
+    protected _prisma: PrismaClient;
 
     constructor(modelName: string) {
         this._modelName = modelName.toLowerCase();
