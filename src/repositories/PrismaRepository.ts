@@ -1,13 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 import IRepository, { RepositoryModel, SearchFilter, SearchOptions } from './IRepository';
 
+const prismaClient = new PrismaClient();
+
 export abstract class PrismaRepository<T extends RepositoryModel> implements IRepository<T> {
     protected _modelName: string;
     protected _prisma: PrismaClient;
 
     constructor(modelName: string) {
         this._modelName = modelName.toLowerCase();
-        this._prisma = new PrismaClient();
+        this._prisma = prismaClient;
     }
 
     async create(data: T) {
@@ -33,13 +35,14 @@ export abstract class PrismaRepository<T extends RepositoryModel> implements IRe
     }
 
     async findMany(filter?: SearchFilter<T>, options?: SearchOptions<T>) {
-        const where = filter || undefined;
+        const where = filter.where || undefined;
+        const include = filter.include || undefined;
         const orderBy = options?.sortField ? { [options.sortField]: options?.sortDirection || 'asc' } : undefined;
         const take = options?.pageSize || undefined;
         const skip = options?.page && take ? options.page & take : undefined;
 
         const [result, totalRecords] = await this._prisma.$transaction([
-            this._prisma[this._modelName].findMany({ where, orderBy, take, skip }),
+            this._prisma[this._modelName].findMany({ where, include, orderBy, take, skip }),
             this._prisma[this._modelName].count({ where }),
         ]);
         return { result, totalRecords };

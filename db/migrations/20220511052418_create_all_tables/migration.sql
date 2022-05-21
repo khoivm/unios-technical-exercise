@@ -18,7 +18,7 @@ CREATE TABLE "Room" (
 
 -- CreateTable
 CREATE TABLE "Session" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "day" TEXT NOT NULL,
     "startTime" TEXT NOT NULL,
 
@@ -30,7 +30,7 @@ CREATE TABLE "Lesson" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "roomId" INTEGER NOT NULL,
-    "sessionId" INTEGER NOT NULL,
+    "sessionId" TEXT NOT NULL,
     "teacherId" INTEGER NOT NULL,
 
     CONSTRAINT "Lesson_pkey" PRIMARY KEY ("id")
@@ -44,6 +44,12 @@ CREATE UNIQUE INDEX "Room_name_roomCode_key" ON "Room"("name", "roomCode");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Session_day_startTime_key" ON "Session"("day", "startTime");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "teacher_id_session_id_key" ON "Lesson"("teacherId", "sessionId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "room_id_session_id_key" ON "Lesson"("roomId", "sessionId");
 
 -- AddForeignKey
 ALTER TABLE "Lesson" ADD CONSTRAINT "Lesson_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "Teacher"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

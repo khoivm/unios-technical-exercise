@@ -57,9 +57,9 @@ async function main() {
         await prisma.$executeRaw(
             Prisma.sql`SELECT setval(pg_get_serial_sequence('"Room"', 'id'), coalesce(max(id)+1, 1), false) FROM "Room";`
         );
-        await prisma.$executeRaw(
-            Prisma.sql`SELECT setval(pg_get_serial_sequence('"Session"', 'id'), coalesce(max(id)+1, 1), false) FROM "Session";`
-        );
+        // await prisma.$executeRaw(
+        //     Prisma.sql`SELECT setval(pg_get_serial_sequence('"Session"', 'id'), coalesce(max(id)+1, 1), false) FROM "Session";`
+        // );
         await prisma.$executeRaw(
             Prisma.sql`SELECT setval(pg_get_serial_sequence('"Teacher"', 'id'), coalesce(max(id)+1, 1), false) FROM "Teacher";`
         );
